@@ -27,9 +27,9 @@ export class UserController {
   async findById(@Param('id', ParseUUIDPipe) id: string): Promise<User> {
     const found = await this.service.findById(id);
 
-    if (!found)
+    if (!found) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-
+    }
     return found;
   }
 
@@ -45,9 +45,9 @@ export class UserController {
   ): Promise<User> {
     const found = await this.service.findById(id);
 
-    if (!found)
+    if (!found) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-
+    }
     user.id = found.id;
 
     return this.service.save(user);
@@ -58,9 +58,9 @@ export class UserController {
   async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
     const found = await this.service.findById(id);
 
-    if (!found)
+    if (!found) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-
+    }
     return this.service.remove(id);
   }
 }
